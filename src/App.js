@@ -1,7 +1,11 @@
 import { Route, Routes, Link, NavLink } from "react-router-dom";
-import Blog from "./pages/Blog";
+import BlogLayout from "./pages/blog";
+import Categories from "./pages/blog/Categories";
+import Post from "./pages/blog/Post";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
+import Blog from "./pages/blog/Blog";
+import Page404 from "./pages/404";
 
 function App() {
 
@@ -15,7 +19,12 @@ function App() {
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/contact" element={<Contact></Contact>}></Route>
-        <Route path="/blog" element={<Blog></Blog>}></Route>
+        <Route path="/blog" element={<BlogLayout />}>
+          <Route index={true} element={<Blog/>} />
+          <Route path="categories" element={<Categories />} />
+          <Route path="post/:id/:url"  element={<Post />} />
+        </Route>
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </>
   );
